@@ -27,3 +27,10 @@ The H-E-B ATM Application is a simple and interactive ATM simulation built with 
 - **Context API & useReducer**: For global state management.
 - **React Router**: For routing between different pages.
 - **Caching User** Data: Save user data and balance in local storage to persist state across page reloads.
+
+  ## Setup Instructions
+
+- ** git clone https://github.com/taroserigano/HEB-React-ATM-App.git
+- ** cd .\HEB-React-ATM-App\ 
+- ** npm install
+- ** npm start
