@@ -30,7 +30,7 @@ The H-E-B ATM Application is a simple and interactive ATM simulation built with 
 
   ## Setup Instructions
 
-- ** git clone https://github.com/taroserigano/HEB-React-ATM-App.git
-- ** cd .\HEB-React-ATM-App\ 
-- ** npm install
-- ** npm start
+- 1 git clone https://github.com/taroserigano/HEB-React-ATM-App.git
+- 2 cd .\HEB-React-ATM-App\ 
+- 3 npm install
+- 4 npm start
