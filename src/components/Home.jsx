@@ -17,6 +17,13 @@ const Home = () => {
   const navigate = useNavigate();
   const ref = useRef(null);
 
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!state.user) {
+      navigate("/login");
+    }
+  }, [state.user, navigate]);
+
   const handleLogout = async () => {
     try {
       localStorage.removeItem("user");
