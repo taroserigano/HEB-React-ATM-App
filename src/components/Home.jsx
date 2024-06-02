@@ -137,7 +137,7 @@ const Home = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded p-8 mb-4 w-96">
+      <div className="bg-white dark:bg-gray-800 shadow-md rounded p-8 mb-4 w-full max-w-lg">
         <h1 className="text-4xl font-black mb-4 text-center text-red-600 ">
           H-E-B ATM
         </h1>

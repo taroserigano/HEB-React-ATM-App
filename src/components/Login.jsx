@@ -41,7 +41,7 @@ const Login = () => {
         state.darkMode ? "bg-gray-900" : "bg-gray-200"
       }`}
     >
-      <div className="bg-gray-800 shadow-md rounded-lg p-8 text-red-600 w-80">
+      <div className="bg-gray-800 shadow-md rounded-lg p-8 text-red-600 w-full max-w-xs">
         <h1 className="text-3xl font-black mb-6 text-center">H-E-B ATM</h1>
         <h3 className="text-white text-xl font-bold mb-6 text-center">
           Enter your PIN{" "}
