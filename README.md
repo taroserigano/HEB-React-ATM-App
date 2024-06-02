@@ -26,3 +26,4 @@ The H-E-B ATM Application is a simple and interactive ATM simulation built with 
 - **Tailwind CSS**: Utility-first CSS framework for styling.
 - **Context API & useReducer**: For global state management.
 - **React Router**: For routing between different pages.
+- **Caching User** Data: Save user data and balance in local storage to persist state across page reloads.
