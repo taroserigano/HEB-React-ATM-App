@@ -1,20 +1,16 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png"; // Make sure to add your logo image to the assets folder
+import logo from "../assets/logo.png";
 
 const Header = () => {
-  const { state, dispatch } = useContext(UserContext);
-
-  const toggleDarkMode = () => {
-    dispatch({ type: "TOGGLE_DARK_MODE" });
-  };
+  const { state, toggleDarkMode } = useContext(UserContext);
 
   return (
     <header className="bg-red-600 p-4 text-white">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
-          <img src={logo} alt="HEB Logo" className="h-10" />
+          <img src={logo} alt="H-E-B Logo" className="h-10" />
         </Link>
         {state.user && (
           <div className="flex items-center gap-4">

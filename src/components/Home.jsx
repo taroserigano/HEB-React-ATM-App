@@ -9,7 +9,8 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const { state, dispatch } = useContext(UserContext);
+  const { state, deposit, withdraw, setDailyLimit, resetDailyLimit, logout } =
+    useContext(UserContext);
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,8 +28,7 @@ const Home = () => {
 
   const handleLogout = async () => {
     try {
-      localStorage.removeItem("user");
-      dispatch({ type: "LOGOUT" });
+      logout();
       navigate("/login");
     } catch (error) {
       console.error("Error during logout:", error);
@@ -58,7 +58,7 @@ const Home = () => {
         return;
       }
       setLoading(true);
-      dispatch({ type: "DEPOSIT", payload: depositAmount });
+      deposit(depositAmount);
       setAmount("");
       setError("");
       setLoading(false);
@@ -68,7 +68,7 @@ const Home = () => {
       alert("An error occurred during deposit. Please try again.");
       setLoading(false);
     }
-  }, [amount, dispatch]);
+  }, [amount, deposit]);
 
   const handleWithdraw = useCallback(async () => {
     try {
@@ -77,16 +77,8 @@ const Home = () => {
         setError("Please enter a valid amount.");
         return;
       }
-      if (withdrawAmount > state.balance) {
-        setError("Insufficient funds.");
-        return;
-      }
-      if (state.dailyWithdrawn + withdrawAmount > state.dailyLimit) {
-        setError("Daily withdrawal limit exceeded.");
-        return;
-      }
       setLoading(true);
-      dispatch({ type: "WITHDRAW", payload: withdrawAmount });
+      withdraw(withdrawAmount);
       setAmount("");
       setError("");
       setLoading(false);
@@ -96,7 +88,7 @@ const Home = () => {
       alert("An error occurred during withdrawal. Please try again.");
       setLoading(false);
     }
-  }, [amount, state.balance, state.dailyWithdrawn, state.dailyLimit, dispatch]);
+  }, [amount, withdraw]);
 
   const handleClear = () => {
     setAmount("");
@@ -110,7 +102,7 @@ const Home = () => {
         setError("Please enter a valid limit.");
         return;
       }
-      dispatch({ type: "SET_DAILY_LIMIT", payload: limit });
+      setDailyLimit(limit);
       setNewDailyLimit("");
       setError("");
     } catch (error) {
@@ -119,31 +111,18 @@ const Home = () => {
         "An error occurred while setting the daily limit. Please try again."
       );
     }
-  }, [newDailyLimit, dispatch]);
-
-  const resetDailyLimit = async () => {
-    try {
-      dispatch({ type: "RESET_DAILY_LIMIT" });
-    } catch (error) {
-      console.error("Error resetting daily limit:", error);
-      alert(
-        "An error occurred while resetting the daily limit. Please try again."
-      );
-    }
-  };
-
-  useEffect(() => {
-    ref.current.focus();
-  }, []);
+  }, [newDailyLimit, setDailyLimit]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-200 dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded p-8 mb-4 w-full max-w-lg">
-        <h1 className="text-4xl font-black mb-4 text-center text-red-600 ">
-          H-E-B ATM
-        </h1>
+    <div
+      className={`flex items-center justify-center min-h-screen ${
+        state.darkMode ? "bg-gray-900" : "bg-gray-200"
+      }`}
+    >
+      <div className="bg-gray-800 shadow-md rounded-lg p-8 text-red-600 w-full max-w-md">
+        <h1 className="text-3xl font-black mb-6 text-center">H-E-B ATM</h1>
         {loading ? (
-          <p className="text-center text-xl text-gray-900 dark:text-gray-100">
+          <p className="text-lg font-semibold text-center text-gray-900 dark:text-gray-100">
             Processing...
           </p>
         ) : (

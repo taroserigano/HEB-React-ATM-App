@@ -4,21 +4,20 @@ import { UserContext } from "../context/UserContext";
 
 const Login = () => {
   const [pin, setPin] = useState("");
-  const { state, dispatch } = useContext(UserContext);
+  const { state, login } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleButtonClick = (value) => {
-    // allow only 4 digits
+    // limit to 4 digits
     setPin((prevPin) => (prevPin.length < 4 ? prevPin + value : prevPin));
   };
 
   const handleLogin = async () => {
     try {
-      // if matched, log in
+      // if PIN matched
       if (pin === "7777") {
         const user = { pin };
-        localStorage.setItem("user", JSON.stringify(user));
-        dispatch({ type: "LOGIN", payload: user });
+        login(user);
         navigate("/");
       } else {
         alert("Invalid PIN");

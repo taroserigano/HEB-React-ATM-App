@@ -1,9 +1,11 @@
 import React, { createContext, useReducer, useEffect } from "react";
 
+// initial setup
 const initialState = {
   user: null,
-  balance: 2000, // Initial
+  balance: 2000,
   dailyLimit: 500,
+  totalWithdrawn: 0,
   darkMode: false,
 };
 
@@ -19,6 +21,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         balance: state.balance - action.payload,
+        totalWithdrawn: state.totalWithdrawn + action.payload,
       };
     case "RESET_DAILY_LIMIT":
       return { ...state, dailyLimit: 500 };
@@ -51,8 +54,56 @@ export const UserContextProvider = ({ children }) => {
     localStorage.setItem("darkMode", JSON.stringify(state.darkMode));
   }, [state.darkMode]);
 
+  const login = (user) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    dispatch({ type: "LOGIN", payload: user });
+  };
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    dispatch({ type: "LOGOUT" });
+  };
+
+  const deposit = (amount) => {
+    dispatch({ type: "DEPOSIT", payload: amount });
+  };
+
+  const withdraw = (amount) => {
+    if (amount > state.balance) {
+      alert("Insufficient funds");
+    } else if (state.totalWithdrawn + amount > state.dailyLimit) {
+      // exceeding the daily limit
+      alert("Daily limit exceeded");
+    } else {
+      dispatch({ type: "WITHDRAW", payload: amount });
+    }
+  };
+
+  const resetDailyLimit = () => {
+    dispatch({ type: "RESET_DAILY_LIMIT" });
+  };
+
+  const setDailyLimit = (limit) => {
+    dispatch({ type: "SET_DAILY_LIMIT", payload: limit });
+  };
+
+  const toggleDarkMode = () => {
+    dispatch({ type: "TOGGLE_DARK_MODE" });
+  };
+
   return (
-    <UserContext.Provider value={{ state, dispatch }}>
+    <UserContext.Provider
+      value={{
+        state,
+        login,
+        logout,
+        deposit,
+        withdraw,
+        resetDailyLimit,
+        setDailyLimit,
+        toggleDarkMode,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

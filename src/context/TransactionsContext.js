@@ -30,7 +30,6 @@ export const TransactionsContext = createContext();
 export const TransactionsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // get data at initial loading
   useEffect(() => {
     const storedBalance = localStorage.getItem("balance");
     const storedDailyLimit = localStorage.getItem("dailyLimit");
@@ -79,7 +78,6 @@ export const TransactionsContextProvider = ({ children }) => {
     <TransactionsContext.Provider
       value={{
         state,
-        dispatch,
         deposit,
         withdraw,
         resetDailyLimit,
