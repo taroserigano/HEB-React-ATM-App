@@ -148,17 +148,17 @@ const Home = () => {
           </p>
         ) : (
           <>
-            <button
-              onClick={() => setShowBalance(!showBalance)}
-              className="mb-4 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              {showBalance ? "Hide balance" : "Query Balance"}
-            </button>
-            {showBalance && (
-              <p className="mb-4 text-lg font-semibold text-center text-gray-900 dark:text-gray-100">
-                Current Balance: ${state.balance}
+            <div className="flex items-center justify-center mb-4 gap-4">
+              <button
+                onClick={() => setShowBalance(!showBalance)}
+                className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                {showBalance ? "Hide Balance" : "Show Balance"}
+              </button>
+              <p className="text-lg font-semibold text-center text-gray-900 dark:text-gray-100 mr-4">
+                {showBalance ? `Current Balance: $${state.balance}` : ""}
               </p>
-            )}
+            </div>
             <div className="mb-4 text-center">
               <input
                 type="text"
