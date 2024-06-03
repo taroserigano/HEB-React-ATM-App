@@ -134,7 +134,7 @@ const Home = () => {
               >
                 {showBalance ? "Hide Balance" : "Show Balance"}
               </button>
-              <p className="text-lg font-semibold text-center text-gray-900 dark:text-gray-100 mr-4">
+              <p className="text-lg font-semibold text-center text-white dark:text-gray-100 mr-4">
                 {showBalance ? `Current Balance: $${state.balance}` : ""}
               </p>
             </div>
@@ -188,7 +188,7 @@ const Home = () => {
               </button>
             </div>
 
-            <p className="text-lg font-semibold text-center text-gray-900 dark:text-gray-100">
+            <p className="text-lg font-semibold text-center text-white dark:text-gray-100">
               Daily Limit: ${state.dailyLimit}
             </p>
             <div className="flex flex-col gap-2 mt-4">
@@ -197,7 +197,7 @@ const Home = () => {
                 placeholder="Set new daily limit"
                 value={newDailyLimit}
                 onChange={(e) => setNewDailyLimit(e.target.value)}
-                className="w-full py-2 px-3 text-gray-700 dark:text-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-center bg-gray-200 dark:bg-gray-700"
+                className="w-full py-2 px-3 text-gray-900 dark:text-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-center bg-gray-200 dark:bg-gray-700"
               />
               <button
                 onClick={handleSetDailyLimit}
