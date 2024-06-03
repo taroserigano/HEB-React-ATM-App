@@ -77,7 +77,14 @@ export const TransactionsContextProvider = ({ children }) => {
 
   return (
     <TransactionsContext.Provider
-      value={{ state, deposit, withdraw, resetDailyLimit, setDailyLimit }}
+      value={{
+        state,
+        dispatch,
+        deposit,
+        withdraw,
+        resetDailyLimit,
+        setDailyLimit,
+      }}
     >
       {children}
     </TransactionsContext.Provider>

@@ -14,6 +14,7 @@ const Home = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [newDailyLimit, setNewDailyLimit] = useState("");
+  const [showBalance, setShowBalance] = useState(false);
   const navigate = useNavigate();
   const ref = useRef(null);
 
@@ -147,9 +148,17 @@ const Home = () => {
           </p>
         ) : (
           <>
-            <p className="mb-4 text-lg font-semibold text-center text-gray-900 dark:text-gray-100">
-              Current Balance: ${state.balance}
-            </p>
+            <button
+              onClick={() => setShowBalance(!showBalance)}
+              className="mb-4 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              {showBalance ? "Hide balance" : "Query Balance"}
+            </button>
+            {showBalance && (
+              <p className="mb-4 text-lg font-semibold text-center text-gray-900 dark:text-gray-100">
+                Current Balance: ${state.balance}
+              </p>
+            )}
             <div className="mb-4 text-center">
               <input
                 type="text"
