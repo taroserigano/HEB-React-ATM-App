@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from "react";
 
-// initial setup
+// set initial state
 const initialState = {
   user: null,
   balance: 2000,
@@ -40,6 +40,7 @@ export const UserContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    // extract user data at initial rendering 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedDarkMode = JSON.parse(localStorage.getItem("darkMode"));
     if (storedUser) {
