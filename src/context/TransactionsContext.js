@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useEffect } from "react";
 
+// set the initial state 
 const initialState = {
   balance: 2000,
   dailyLimit: 500,
@@ -31,8 +32,10 @@ export const TransactionsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    // extract from the local storage 
     const storedBalance = localStorage.getItem("balance");
     const storedDailyLimit = localStorage.getItem("dailyLimit");
+    // if exists 
     if (storedBalance) {
       dispatch({ type: "SET_BALANCE", payload: parseFloat(storedBalance) });
     }
@@ -55,6 +58,7 @@ export const TransactionsContextProvider = ({ children }) => {
   };
 
   const withdraw = (amount) => {
+    // check if there's enough balance 
     if (amount > state.balance) {
       alert("Insufficient funds");
     } else if (state.withdrawalsToday + amount > state.dailyLimit) {
