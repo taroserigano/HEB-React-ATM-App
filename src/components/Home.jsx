@@ -20,7 +20,7 @@ const Home = () => {
   const ref = useRef(null);
 
   useEffect(() => {
-    // Redirect to login if not authenticated
+    // redirect to login if not authenticated
     if (!state.user) {
       navigate("/login");
     }
@@ -38,6 +38,7 @@ const Home = () => {
 
   const handleButtonClick = (value) => {
     setAmount((prevAmount) =>
+      // make sure it's no more than 8 digits 
       prevAmount.length < 8 ? prevAmount + value : prevAmount
     );
     ref.current.focus();
@@ -45,6 +46,7 @@ const Home = () => {
 
   const handleAmountChange = (event) => {
     const { value } = event.target;
+      // make sure it's no more than 8 digits 
     if (!isNaN(value) && value.length <= 8) {
       setAmount(value);
     }
