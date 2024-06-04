@@ -17,6 +17,7 @@ const Login = () => {
       // if PIN matched
       if (pin === "7777") {
         const user = { pin };
+        console.log(user);
         login(user);
         navigate("/");
       } else {
