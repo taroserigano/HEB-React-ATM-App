@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const Header = () => {
-  // extract toggle ability 
+  // extract dark mode toggling ability 
   const { state, toggleDarkMode } = useContext(UserContext); 
 
   return (
